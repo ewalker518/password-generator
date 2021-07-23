@@ -65,7 +65,7 @@ function writePassword() {
     
     var createPassword = "";
     for (var i = 0; i < passwordLength; i++) {
-      createPassword = createPassword + choices[Math.floor(Math.random() * choices.length)];
+      createPassword += choices[Math.floor(Math.random() * choices.length)];
     }
   var passwordText = document.querySelector("#password");
   passwordText.value = createPassword;
