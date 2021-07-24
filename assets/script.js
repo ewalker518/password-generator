@@ -18,6 +18,13 @@ function writePassword() {
   var includeUppercase = window.confirm("Would you like your password to contain uppercase letters?");
   var includeNumbers = window.confirm("Would you like your password to contain numbers?");
   var includeSymbols = window.confirm("Would you like your password to include special characters? e.g. ! < # % & @ $ /")
+
+  // if they say no to everything, tell them they done goofed
+  if (!includeLowercase && !includeUppercase && !includeSymbols && !includeNumbers) {
+    alert("You need to select at least one criteria");
+    writePassword();
+  }
+
   var passwordLength = parseInt(window.prompt("How many characters would you like your password to contain? Choose between 8 and 128")) // change data type for passwordLength to integer
 
     // Conditional statement to check that the user inputs a valid number
@@ -32,27 +39,27 @@ function writePassword() {
     }
 
     if (includeLowercase && includeUppercase && includeNumbers && includeSymbols) {
-      choices = (lowercase + uppercase + numbers + symbols);
+      choices = lowercase.concat(uppercase, numbers, symbols);
     } else if (includeUppercase && includeNumbers && includeSymbols) {
-      choices = (uppercase + numbers + symbols);
+      choices = uppercase.concat(numbers, symbols);
     } else if (includeLowercase && includeNumbers && includeSymbols) {
-      choices = (lowercase + numbers + symbols);
+      choices = lowercase.concat(numbers, symbols);
     } else if (includeUppercase && includeLowercase && includeSymbols) {
-      choices = (uppercase + lowercase + symbols);
+      choices = uppercase.concat(lowercase, symbols);
     } else if (includeUppercase && includeLowercase && includeNumbers) {
-      choices = (uppercase + lowercase + numbers);
+      choices = uppercase.concat(lowercase, numbers);
     } else if (includeUppercase && includeNumbers) {
-      choices = (uppercase + numbers);
+      choices = uppercase.concat(numbers);
     } else if (includeUppercase && includeSymbols) {
-      choices = (uppercase + symbols);
+      choices = uppercase.concat(symbols);
     } else if (includeUppercase && includeLowercase) {
-      choices = (uppercase + lowercase);
+      choices = uppercase.concat(lowercase);
     } else if (includeLowercase && includeNumbers) {
-      choices = (lowercase + numbers);
+      choices = lowercase.concat(numbers);
     } else if (includeLowercase && includeSymbols) {
-      choices = (lowercase + symbols);
+      choices = lowercase.concat(symbols);
     } else if (includeNumbers && includeSymbols) {
-      choices = (numbers + symbols);
+      choices = numbers.concat(symbols);
     } else if (includeUppercase) {
       choices = (uppercase);
     } else if (includeLowercase) {
@@ -60,7 +67,6 @@ function writePassword() {
     } else if (includeNumbers) {
       choices = (numbers);
     } else { choices = (symbols); }
-
     console.log(choices);
     
     var createPassword = "";
